@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     if (!parsedData.success) {
       return NextResponse.json(
         { message: 'Invalid Data', errors: parsedData.error.format() },
-        { status: 400 }
+        { status: 422 }
       )
     }
 
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     if (userFound) {
       return NextResponse.json(
         { message: 'Email or username already exists' },
-        { status: 400 }
+        { status: 409 }
       )
     }
 

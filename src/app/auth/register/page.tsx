@@ -3,49 +3,40 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerSchema, RegisterFormData } from '@/schemas/register.schema'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { API_ROUTES, ROUTES } from '@/routes'
 import { apiClient } from '@/apiClient'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 
 export default function Register() {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-
   const router = useRouter()
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     mode: 'onChange',
   })
 
   const onSubmit = async (data: RegisterFormData) => {
-    setIsSubmitting(true)
-
     try {
       const response = await apiClient(API_ROUTES.AUTH.REGISTER, 'POST', data)
-
-      const responseJSON = await response.json()
 
       if (response.ok && response.status === 201) {
         reset()
         toast.success('Usuario creado correctamente')
         router.push(ROUTES.AUTH.LOGIN)
       } else {
-        if (responseJSON.message === 'Email or username already exists')
+        if (response.status === 409)
           toast.error('El email o el nombre de usuario ya están registrados')
         else toast.error('Error al registrar usuario')
       }
     } catch (error: unknown) {
       if (error instanceof Error) toast.error(error.message)
       else toast.error('Error de conexión, intenta nuevamente')
-    } finally {
-      setIsSubmitting(false)
     }
   }
 

@@ -5,8 +5,11 @@ import { loginSchema, LoginFormData } from '@/schemas/login.schema'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { ROUTES } from '@/routes'
-import Link from 'next/link'
 import toast from 'react-hot-toast'
+import AuthSwitchLink from '@/components/auth/AuthSwitchLink'
+import SubmitButton from '@/components/auth/SubmitButton'
+import FormField from '@/components/auth/FormField'
+import AuthTitle from '@/components/auth/AuthTitle'
 
 export default function Login() {
   const router = useRouter()
@@ -48,69 +51,35 @@ export default function Login() {
   })
 
   return (
-    <>
+    <div className="px-5 my-10">
       <form
         onSubmit={onSubmit}
         className="flex flex-col gap-3 items-center mt-5 max-w-md mx-auto"
       >
-        <h2 className="text-third font-bold text-5xl">Iniciar Sesión</h2>
+        <AuthTitle title="Iniciar sesión" />
 
-        <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="email" className="text-third font-medium">
-            Correo o nombre de usuario
-          </label>
+        <FormField
+          label="Correo o nombre de usuario"
+          type="text"
+          placeholder="example@email.com"
+          autoComplete="username"
+          {...register('identifier')}
+          error={errors.identifier}
+        />
 
-          <input
-            id="identifier"
-            type="text"
-            placeholder="example@email.com"
-            autoComplete="username"
-            {...register('identifier')}
-            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
-          />
+        <FormField
+          label="Contraseña"
+          type="password"
+          placeholder="********"
+          autoComplete="current-password"
+          {...register('password')}
+          error={errors.password}
+        />
 
-          {errors.identifier && (
-            <span className="text-red-500 text-xs">
-              {errors.identifier.message}
-            </span>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="password" className="text-third font-medium">
-            Contraseña
-          </label>
-
-          <input
-            id="password"
-            type="password"
-            placeholder="********"
-            autoComplete="current-password"
-            {...register('password')}
-            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
-          />
-
-          {errors.password && (
-            <span className="text-red-500 text-xs">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-
-        <button
-          disabled={!isValid || isSubmitting}
-          className="bg-second text-first font-semibold text-lg py-3 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
-        </button>
+        <SubmitButton isSubmitting={isSubmitting} isValid={isValid} />
       </form>
 
-      <div className="flex items-center gap-1 mx-auto mt-2 w-fit">
-        <span className="text-third">¿Aún no tienes una cuenta?</span>
-        <Link href={ROUTES.AUTH.REGISTER} className="text-second font-semibold">
-          Registrarse
-        </Link>
-      </div>
-    </>
+      <AuthSwitchLink />
+    </div>
   )
 }

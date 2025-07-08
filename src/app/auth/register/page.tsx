@@ -5,8 +5,11 @@ import { registerSchema, RegisterFormData } from '@/schemas/register.schema'
 import { useRouter } from 'next/navigation'
 import { API_ROUTES, ROUTES } from '@/routes'
 import { apiClient } from '@/apiClient'
-import Link from 'next/link'
 import toast from 'react-hot-toast'
+import AuthSwitchLink from '@/components/auth/AuthSwitchLink'
+import SubmitButton from '@/components/auth/SubmitButton'
+import FormField from '@/components/auth/FormField'
+import AuthTitle from '@/components/auth/AuthTitle'
 
 export default function Register() {
   const router = useRouter()
@@ -41,88 +44,44 @@ export default function Register() {
   }
 
   return (
-    <>
+    <div className="px-5 my-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-3 items-center mt-5 max-w-md mx-auto"
       >
-        <h2 className="text-third font-bold text-5xl">Registro</h2>
+        <AuthTitle title="Crear cuenta" />
 
-        <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="username" className="text-third font-medium">
-            Nombre de usuario
-          </label>
+        <FormField
+          label="Nombre de usuario"
+          type="text"
+          placeholder="miUsuario123"
+          autoComplete="username"
+          {...register('username')}
+          error={errors.username}
+        />
 
-          <input
-            id="username"
-            type="text"
-            placeholder="miUsuario123"
-            autoComplete="username"
-            {...register('username')}
-            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
-          />
+        <FormField
+          label="Correo"
+          type="email"
+          placeholder="example@email.com"
+          autoComplete="email"
+          {...register('email')}
+          error={errors.email}
+        />
 
-          {errors.username && (
-            <span className="text-red-500 text-xs">
-              {errors.username.message}
-            </span>
-          )}
-        </div>
+        <FormField
+          label="Contraseña"
+          type="password"
+          placeholder="********"
+          autoComplete="new-password"
+          {...register('password')}
+          error={errors.password}
+        />
 
-        <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="email" className="text-third font-medium">
-            Correo
-          </label>
-
-          <input
-            id="email"
-            type="email"
-            placeholder="example@email.com"
-            autoComplete="email"
-            {...register('email')}
-            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
-          />
-
-          {errors.email && (
-            <span className="text-red-500 text-xs">{errors.email.message}</span>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="password" className="text-third font-medium">
-            Contraseña
-          </label>
-
-          <input
-            id="password"
-            type="password"
-            placeholder="********"
-            autoComplete="new-password"
-            {...register('password')}
-            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
-          />
-
-          {errors.password && (
-            <span className="text-red-500 text-xs">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-
-        <button
-          disabled={!isValid || isSubmitting}
-          className="bg-second text-first font-semibold text-lg py-3 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? 'Registrando...' : 'Registrar'}
-        </button>
+        <SubmitButton isSubmitting={isSubmitting} isValid={isValid} />
       </form>
 
-      <div className="flex items-center gap-1 mx-auto mt-2 w-fit">
-        <span className="text-third">¿Ya tienes una cuenta?</span>
-        <Link href={ROUTES.AUTH.LOGIN} className="text-second font-semibold">
-          Iniciar sesión
-        </Link>
-      </div>
-    </>
+      <AuthSwitchLink />
+    </div>
   )
 }

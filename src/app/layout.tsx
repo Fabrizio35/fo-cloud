@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import Navbar from '@/components/Navbar'
+// import Navbar from '@/components/Navbar/Navbar'
 import './globals.css'
 
 const inter = Inter({
@@ -10,7 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'FO Cloud',
-  description: 'Google Drive-like application for uploading files',
+  description:
+    'Subí y accedé a tus archivos de forma simple y segura desde cualquier lugar',
 }
 
 export default function RootLayout({
@@ -19,10 +20,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+    <html lang="es">
+      <body className={`${inter.className} antialiased bg-first`}>
         <Toaster position="bottom-right" toastOptions={{ duration: 4000 }} />
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
       </body>
     </html>

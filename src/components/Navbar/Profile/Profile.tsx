@@ -1,11 +1,11 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getServerSession } from 'next-auth/next'
-import LogoutButton from './LogoutButton'
+import ProfileButton from './ProfileButton'
 
-const Navbar = async () => {
+const Profile = async () => {
   const session = await getServerSession(authOptions)
 
-  return <header>{session?.user && <LogoutButton />}</header>
+  return <ProfileButton username={session?.user?.username} />
 }
 
-export default Navbar
+export default Profile

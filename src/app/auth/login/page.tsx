@@ -39,6 +39,7 @@ export default function Login() {
       } else {
         toast.success('Bienvenido')
         router.push(ROUTES.HOME)
+        router.refresh()
       }
     } catch (error: unknown) {
       if (error instanceof Error) toast.error(error.message)
@@ -100,15 +101,15 @@ export default function Login() {
 
         <button
           disabled={!isValid || isSubmitting}
-          className="bg-blue-500 text-white py-1 rounded-md cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-second text-first font-semibold text-lg py-1 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
         </button>
       </form>
 
       <div className="flex items-center gap-1 mx-auto w-fit">
-        <span>¿Aún no tienes una cuenta?</span>
-        <Link href={ROUTES.AUTH.REGISTER} className="text-blue-500">
+        <span className="text-black/70">¿Aún no tienes una cuenta?</span>
+        <Link href={ROUTES.AUTH.REGISTER} className="text-second font-semibold">
           Registrarse
         </Link>
       </div>

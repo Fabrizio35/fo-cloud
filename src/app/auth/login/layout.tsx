@@ -11,7 +11,7 @@ export default function LoginLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex min-h-screen">
-      <div className="w-1/2">{children}</div>
+      <div className="w-1/2 my-auto">{children}</div>
       <AuthInfo />
     </div>
   )

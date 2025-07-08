@@ -41,15 +41,15 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 items-center mt-5 max-w-sm mx-auto"
+        className="flex flex-col gap-3 items-center mt-5 max-w-md mx-auto"
       >
-        <h2 className="text-gray-900 font-semibold text-4xl">Registro</h2>
+        <h2 className="text-third font-bold text-5xl">Registro</h2>
 
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="username" className="text-slate-600">
+          <label htmlFor="username" className="text-third font-medium">
             Nombre de usuario
           </label>
 
@@ -59,7 +59,7 @@ export default function Register() {
             placeholder="miUsuario123"
             autoComplete="username"
             {...register('username')}
-            className="bg-slate-300 rounded-md p-1 border-[1px] border-slate-500 w-full"
+            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
           />
 
           {errors.username && (
@@ -70,7 +70,7 @@ export default function Register() {
         </div>
 
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="email" className="text-slate-600">
+          <label htmlFor="email" className="text-third font-medium">
             Correo
           </label>
 
@@ -80,7 +80,7 @@ export default function Register() {
             placeholder="example@email.com"
             autoComplete="email"
             {...register('email')}
-            className="bg-slate-300 rounded-md p-1 border-[1px] border-slate-500 w-full"
+            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
           />
 
           {errors.email && (
@@ -89,7 +89,7 @@ export default function Register() {
         </div>
 
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="password" className="text-slate-600">
+          <label htmlFor="password" className="text-third font-medium">
             Contraseña
           </label>
 
@@ -99,7 +99,7 @@ export default function Register() {
             placeholder="********"
             autoComplete="new-password"
             {...register('password')}
-            className="bg-slate-300 rounded-md p-1 border-[1px] border-slate-500 w-full"
+            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
           />
 
           {errors.password && (
@@ -111,18 +111,18 @@ export default function Register() {
 
         <button
           disabled={!isValid || isSubmitting}
-          className="bg-blue-500 text-white py-1 rounded-md cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-second text-first font-semibold text-lg py-3 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Registrando...' : 'Registrar'}
         </button>
       </form>
 
-      <div className="flex items-center gap-1 mx-auto w-fit">
-        <span>¿Ya tienes una cuenta?</span>
-        <Link href={ROUTES.AUTH.LOGIN} className="text-blue-500">
+      <div className="flex items-center gap-1 mx-auto mt-2 w-fit">
+        <span className="text-third">¿Ya tienes una cuenta?</span>
+        <Link href={ROUTES.AUTH.LOGIN} className="text-second font-semibold">
           Iniciar sesión
         </Link>
       </div>
-    </div>
+    </>
   )
 }

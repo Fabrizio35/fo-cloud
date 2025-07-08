@@ -48,27 +48,25 @@ export default function Login() {
   })
 
   return (
-    <div>
+    <>
       <form
         onSubmit={onSubmit}
-        className="flex flex-col gap-2 items-center mt-5 max-w-sm mx-auto"
+        className="flex flex-col gap-3 items-center mt-5 max-w-md mx-auto"
       >
-        <h2 className="text-gray-900 font-semibold text-4xl">
-          Inicio de sesión
-        </h2>
+        <h2 className="text-third font-bold text-5xl">Iniciar Sesión</h2>
 
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="email" className="text-slate-600">
-            Email o nombre de usuario
+          <label htmlFor="email" className="text-third font-medium">
+            Correo o nombre de usuario
           </label>
 
           <input
             id="identifier"
             type="text"
-            placeholder="Email o nombre de usuario"
+            placeholder="example@email.com"
             autoComplete="username"
             {...register('identifier')}
-            className="bg-slate-300 rounded-md p-1 border-[1px] border-slate-500 w-full"
+            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
           />
 
           {errors.identifier && (
@@ -79,7 +77,7 @@ export default function Login() {
         </div>
 
         <div className="flex flex-col gap-1 w-full">
-          <label htmlFor="password" className="text-slate-600">
+          <label htmlFor="password" className="text-third font-medium">
             Contraseña
           </label>
 
@@ -89,7 +87,7 @@ export default function Login() {
             placeholder="********"
             autoComplete="current-password"
             {...register('password')}
-            className="bg-slate-300 rounded-md p-1 border-[1px] border-slate-500 w-full"
+            className="bg-fourth/20 rounded-md px-2 py-3 border-[1px] border-fourth w-full text-third text-lg placeholder:text-second/40 outline-third"
           />
 
           {errors.password && (
@@ -101,18 +99,18 @@ export default function Login() {
 
         <button
           disabled={!isValid || isSubmitting}
-          className="bg-second text-first font-semibold text-lg py-1 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-second text-first font-semibold text-lg py-3 rounded-sm cursor-pointer w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
         </button>
       </form>
 
-      <div className="flex items-center gap-1 mx-auto w-fit">
-        <span className="text-black/70">¿Aún no tienes una cuenta?</span>
+      <div className="flex items-center gap-1 mx-auto mt-2 w-fit">
+        <span className="text-third">¿Aún no tienes una cuenta?</span>
         <Link href={ROUTES.AUTH.REGISTER} className="text-second font-semibold">
           Registrarse
         </Link>
       </div>
-    </div>
+    </>
   )
 }

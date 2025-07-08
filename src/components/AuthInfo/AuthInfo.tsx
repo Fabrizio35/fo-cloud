@@ -11,7 +11,7 @@ const AuthInfo = () => {
           <CloudIcon className="size-16" />
         </div>
 
-        <h2 className="text-first/95 text-center text-lg text-pretty">
+        <h2 className="text-first/90 text-center text-xl text-pretty">
           Subí y accedé a tus archivos de forma simple y segura desde cualquier
           lugar
         </h2>

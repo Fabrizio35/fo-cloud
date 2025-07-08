@@ -12,7 +12,7 @@ export default function RegisterLayout({
   return (
     <div className="flex min-h-screen">
       <AuthInfo />
-      <div className="w-1/2">{children}</div>
+      <div className="w-1/2 my-auto">{children}</div>
     </div>
   )
 }

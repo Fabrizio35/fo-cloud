@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-// import Navbar from '@/components/Navbar/Navbar'
 import './globals.css'
 
 const inter = Inter({
@@ -22,8 +21,19 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.className} antialiased bg-first`}>
-        <Toaster position="bottom-right" toastOptions={{ duration: 4000 }} />
-        {/* <Navbar /> */}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              backgroundColor: '#c9356c',
+              color: '#fafafa',
+              fontFamily: 'Inter, sans-serif',
+              fontWeight: '600',
+              fontSize: '1.5rem',
+            },
+          }}
+        />
         {children}
       </body>
     </html>

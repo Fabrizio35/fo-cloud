@@ -34,9 +34,9 @@ const ProfileButton = ({ username }: ProfileButtonProps) => {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-1 text-first cursor-pointer relative"
       >
-        <span className="text-lg font-semibold">{username}</span>
-
         <UserIcon className="size-8" />
+
+        <span className="text-lg font-semibold">{username}</span>
       </button>
 
       {open && (

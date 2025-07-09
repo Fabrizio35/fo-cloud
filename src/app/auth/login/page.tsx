@@ -41,7 +41,7 @@ export default function Login() {
           toast.error('Contraseña incorrecta')
       } else {
         toast.success('Bienvenido')
-        router.push(ROUTES.HOME)
+        router.push(ROUTES.DASHBOARD)
         router.refresh()
       }
     } catch (error: unknown) {

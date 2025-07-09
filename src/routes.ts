@@ -10,5 +10,5 @@ export const ROUTES = {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
   },
-  HOME: '/',
+  DASHBOARD: '/dashboard',
 } as const
